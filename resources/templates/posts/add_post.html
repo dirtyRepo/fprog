@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+	<div class="row">
+		<div class="col-md-offset-4">
+
+			<div class="row">
+				<div class="col-md-6">
+					<h1> Add new post </h1>
+				</div>
+			</div>			
+				
+			<form action="/post/add" method="post">
+				<div class="form-group">
+					<input name="id" id="id" type="hidden" class="form-control">
+					
+					<div class="row">
+						<div class="col-md-2">
+							<label for="title">Title: </label>
+						</div>
+						<div class="col-md-4">
+							<input name="title" id="title" type="text" class="form-control" placeholder="Title" >
+						</div>
+					</div>	
+
+					<div class="row">
+						<div class="col-md-2">
+							<label for="description">Description </label>
+						</div>
+						<div class="col-md-4">
+							<textarea name="description" id="description"class="form-control" placeholder="Description"></textarea> 
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-2">
+							<label for="author">author Id: </label>
+						</div>
+						<div class="col-md-4">
+							<input name="author" id="author" type="number" class="form-control" placeholder="User Id">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-2">
+							<label for="author">tags </label>
+						</div>
+						<div class="col-md-4">
+							<input name="tags" id="tags" type="text" class="form-control" placeholder="User Id">
+						</div>
+					</div>
+
+				</div>
+				
+
+				<div class="row">
+					<div class="col-md-6">
+						<input type="submit" class="btn btn-block btn-success" value="Add post">
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+</div>
+{% endblock %}

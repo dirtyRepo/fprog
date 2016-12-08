@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>All tags</h1>
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Subscribers count</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in tag %}
+            <tr>
+                <td> <a href="/tag/{{item.id}}">{{item.id}}</a> </td>
+                <td> {{item.name}} </td>
+                <td> {{item.subscribers_count}} </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <a href="/tag/add" class="btn btn-primary">Add new tag</a>
+    </div>
+</div>
+{% endblock %}
