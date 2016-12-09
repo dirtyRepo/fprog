@@ -50,32 +50,21 @@
 	(layout/render
 		"posts/post.html" {:post post :updated updated}))
 
-;;feadback
+;;like
 
-(defn all-feadbacks-page [feadback deleted added param]
+(defn all-likes-page [like deleted added param]
 	(layout/render
-		"feadbacks/all_feadbacks.html" {:feadback feadback :deleted deleted :added added :param param}))
+		"likes/all_likes.html" {:like like :deleted deleted :added added :param param}))
 
-(defn add-feadback-page []
+(defn add-like-page []
 	(layout/render
-		"feadbacks/add_feadback.html"))
+		"likes/add_like.html"))
 
-(defn feadback-page [feadback updated]
+(defn like-page [like updated]
 	(layout/render
-		"feadbacks/feadback.html" {:feadback feadback :updated updated}))
+		"likes/like.html" {:like like :updated updated}))
 
-;; categories
 
-(defn all-categories-page [category deleted added param]
-	(layout/render
-		"categories/all_categories.html" {:category category :deleted deleted :added added :param param}))
 
-(defn add-category-page []
-	(layout/render
-		"categories/add_category.html"))
-
-(defn category-page [category updated]
-	(layout/render
-		"categories/category.html" {:category category :updated updated}))
 
 

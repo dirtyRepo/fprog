@@ -18,31 +18,13 @@
             [ads-board.logic.services.users-service :as users-service]
             [ads-board.dal.dto.user :as user]
             [ads-board.dal.rep.users-rep :as users-repo]
+    
 
-            ;;import for category
+            ;;import for like
 
-            [ads-board.logic.services.category-service :as category-service]
-            [ads-board.dal.dto.category :as category]
-            [ads-board.dal.rep.category-rep :as category-repo]
-
-            ;;import for favorite_category
-
-            [ads-board.logic.services.favorite-category-service :as favorite-category-service]
-            [ads-board.dal.dto.favorite-category :as favorite-category]
-            [ads-board.dal.rep.favorite-category-rep :as favorite-category-repo]
-
-
-             ;;import for favorite-post
-
-            [ads-board.logic.services.favorite-post-service :as favorite-post-service]
-            [ads-board.dal.dto.favorite-post :as favorite-post]
-            [ads-board.dal.rep.favorite-post-rep :as favorite-post-repo]
-
-            ;;import for feadback
-
-            [ads-board.logic.services.feadback-service :as feadback-service]
-            [ads-board.dal.dto.feadback :as feadback]
-            [ads-board.dal.rep.feadback-rep :as feadback-repo]
+            [ads-board.logic.services.likes-service :as like-service]
+            [ads-board.dal.dto.like :as like]
+            [ads-board.dal.rep.likes-rep :as like-repo]
 
 
              ;;import for posts
@@ -68,21 +50,12 @@
 (def posts-repository (posts-repo/->posts-rep db/db-spec))
 (def posts-service (posts-service/->posts-service posts-repository))
 
-(def feadback-repository (feadback-repo/->feadback-rep db/db-spec))
-(def feadback-service (feadback-service/->feadback-service feadback-repository))
+(def like-repository (like-repo/->like-rep db/db-spec))
+(def like-service (like-service/->like-service like-repository))
 
-(def category-repository (category-repo/->category-rep db/db-spec))
-(def category-service (category-service/->category-service category-repository))
 
 (def tags-repository (tags-repo/->tags-repo db/db-spec))
 (def tags-service (tags-service/->tags-service tags-repository))
-
-(def favorite-category-repository (favorite-category-repo/->favorite-category-rep db/db-spec))
-(def favorite-category-service (favorite-category-service/->favorite-category-service favorite-category-repository))
-
-(def favorite-post-repository (favorite-post-repo/->favorite-post-rep db/db-spec))
-(def favorite-post-service (favorite-post-service/->favorite-post-service favorite-post-repository))
-
 
 (defn create-user ([login password name lastname birth_date email address phone] (user/->user nil login password name lastname email ))
           ([id login password name lastname birth_date email address phone] (user/->user id login password name lastname email)))
@@ -155,53 +128,27 @@
 
   ;;comments
 
-  (GET "/feadback" [] (view/all-feadbacks-page (.get-items feadback-service) false false nil))
+  (GET "/like" [] (view/all-likes-page (.get-items like-service) false false nil))
 
-  (GET "/feadback/add" [] (view/add-feadback-page))
+  (GET "/like/add" [] (view/add-like-page))
 
-  (POST "/feadback/add" request (do (.insert-item feadback-service (feadback/->feadback
-                        nil
+  (POST "/like/add" request (do (.insert-item like-service (like/->like
                         (get-in request [:params :post_id])
-                        (get-in request [:params :id])
-                        (get-in request [:params :created_at])
-                        (get-in request [:params :body])))
-                  (response/redirect "/feadback")))
+                        (get-in request [:params :user_id])))
+                                (print :post_id :user_id)
+                  (response/redirect "/like")))
 
-  (POST "/feadback/update" request (do (.update-item feadback-service (feadback/->feadback
-                        (get-in request [:params :feadback_id])
+  (POST "/like/update" request (do (.update-item like-service (like/->like
                         (get-in request [:params :post_id])
-                        (get-in request [:params :id])
-                        (get-in request [:params :created_at])
-                        (get-in request [:params :body])))
-                  (response/redirect "/feadback")))
+                        (get-in request [:params :user_id])))
+                  (response/redirect "/like")))
 
-  (POST "/feadback/delete" request (do (.delete-item feadback-service
-                        (get-in request [:params :feadback_id]))
-                 (response/redirect "/feadback")))
+  (POST "/like/delete" request (do (.delete-item like-service
+                        (get-in request [:params :like_id]))
+                 (response/redirect "/like")))
 
-  (GET "/feadback/:id" [id] (view/feadback-page (.get-item feadback-service id) false))
+  (GET "/like/:id" [id] (view/like-page (.get-item like-service id) false))
 
-  ;;category
-
-  (GET "/categories" [] (view/all-categories-page (.get-items category-service) false false nil))
-
-  (GET "/category/add" [] (view/add-category-page))
-
-  (POST "/category/add" request (do (.insert-item category-service (category/->category
-                        nil
-                        (get-in request [:params :c_name])))
-                  (response/redirect "/categories")))
-
-  (POST "/category/update" request (do (.update-item category-service (category/->category
-                        (get-in request [:params :category_id])
-                        (get-in request [:params :c_name])))
-                  (response/redirect "/categories")))
-
-  (POST "/category/delete" request (do (.delete-item category-service
-                        (get-in request [:params :category_id]))
-                 (response/redirect "/categories")))
-
-  (GET "/category/:id" [id] (view/category-page (.get-item category-service id) false))
 
   (GET "/tags" [id] (view/all-tags-page (.get-items tags-service)))
 
