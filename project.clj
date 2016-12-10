@@ -1,4 +1,4 @@
-(defproject ads_board "0.1.0-SNAPSHOT"
+(defproject news_board "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
@@ -23,7 +23,7 @@
                  [org.clojure/tools.logging "0.3.1"]
                  [hiccup-bootstrap "0.1.2"]]
   
-  :ring {:handler ads-board.handler/app}
+  :ring {:handler news_board.handler/app}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.0"]]}})

@@ -1,10 +1,10 @@
-(ns ads-board.logic.services.users-service
+(ns news_board.logic.services.users-service
 	;;(:gen-class)
   (:import [java.lang Exception])
-	(:require [ads-board.logic.services-protocols.base-protocol :as base-protocol]
-			  [ads-board.logic.services-protocols.users-protocol :as users-protocol]
-			  [ads-board.dal.rep.users-rep :as users-repo]
-			  [ads-board.views :as view]))
+	(:require [news_board.logic.services-protocols.base-protocol :as base-protocol]
+			  [news_board.logic.services-protocols.users-protocol :as users-protocol]
+			  [news_board.dal.rep.users-rep :as users-repo]
+			  [news_board.views :as view]))
 
 (defmacro try-request [& args]
   `(try (~@args)

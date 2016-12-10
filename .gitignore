@@ -8,4 +8,4 @@ pom.xml.asc
 *.class
 /.lein-*
 /.nrepl-port
-src/ads_board/dal/db_conf.clj
+src/news_board/dal/db_conf.clj

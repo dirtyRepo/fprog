@@ -1,12 +1,12 @@
-(ns ads-board.dal.rep.users-rep
+(ns news_board.dal.rep.users-rep
 	; ;;(:gen-class)
  ;  (:import [java.sql SQLException])
-	(:require [ads-board.dal.rep-protocol.users-protocol :as users-protocol] 
-		      [ads-board.dal.rep-protocol.base-protocol :as base-protocol]
-			  [ads-board.dal.dto.user :as user-dto]
+	(:require [news_board.dal.rep-protocol.users-protocol :as users-protocol]
+		      [news_board.dal.rep-protocol.base-protocol :as base-protocol]
+			  [news_board.dal.dto.user :as user-dto]
 			  [clojure.java.jdbc.sql :as sql]
 			  [clojure.java.jdbc :as jdbc]
-			  [ads-board.views :as view]))
+			  [news_board.views :as view]))
 
 ; (defmacro try-sql
 ;   [& args]

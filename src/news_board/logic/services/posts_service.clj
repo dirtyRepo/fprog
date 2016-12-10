@@ -1,7 +1,7 @@
-(ns ads-board.logic.services.posts-service
-	(:require [ads-board.logic.services-protocols.base-protocol :as base-protocol]
-			  [ads-board.logic.services-protocols.posts-protocol :as posts-protocol]
-			  [ads-board.dal.rep.posts-rep :as posts-repo]))
+(ns news_board.logic.services.posts-service
+	(:require [news_board.logic.services-protocols.base-protocol :as base-protocol]
+			  [news_board.logic.services-protocols.posts-protocol :as posts-protocol]
+			  [news_board.dal.rep.posts-rep :as posts-repo]))
 
 (defn now [] (new java.util.Date))
 
@@ -23,6 +23,9 @@
 
 	(delete-item [this id]
 		(.delete-item posts-repo id))
+
+	(get-all-users-post [this id_user])
+		(.get-all-users-post)
 
 	posts-protocol/posts-service-protocol
 )

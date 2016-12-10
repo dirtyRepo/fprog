@@ -1,4 +1,4 @@
-# ads_board
+# news_board
 
 FIXME
 

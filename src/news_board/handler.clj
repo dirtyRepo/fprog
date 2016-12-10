@@ -1,4 +1,4 @@
-(ns ads-board.handler
+(ns news_board.handler
   (:use compojure.core)
   (:require [ring.util.response :as response]
             [ring.middleware.json :as middleware]
@@ -8,34 +8,28 @@
             [compojure.handler :as handler]
             [clojure.java.io :as io]
             [ring.util.response :as resp]
-            [ads-board.layout :as layout]
-            [ads-board.views :as view]
+            [news_board.layout :as layout]
+            [news_board.views :as view]
 
-            [ads-board.dal.db-conf :as db]
+            [news_board.dal.db-conf :as db]
 
             ;;import for users
 
-            [ads-board.logic.services.users-service :as users-service]
-            [ads-board.dal.dto.user :as user]
-            [ads-board.dal.rep.users-rep :as users-repo]
-    
+            [news_board.logic.services.users-service :as users-service]
+            [news_board.dal.dto.user :as user]
+            [news_board.dal.rep.users-rep :as users-repo]
 
-            ;;import for like
-
-            [ads-board.logic.services.likes-service :as like-service]
-            [ads-board.dal.dto.like :as like]
-            [ads-board.dal.rep.likes-rep :as like-repo]
 
 
              ;;import for posts
 
-            [ads-board.logic.services.posts-service :as posts-service]
-            [ads-board.dal.dto.post :as post]
-            [ads-board.dal.rep.posts-rep :as posts-repo]
+            [news_board.logic.services.posts-service :as posts-service]
+            [news_board.dal.dto.post :as post]
+            [news_board.dal.rep.posts-rep :as posts-repo]
 
-            [ads-board.logic.services.tags-service :as tags-service]
-            [ads-board.dal.dto.tag :as tag]
-            [ads-board.dal.rep.tags-rep :as tags-repo]
+            [news_board.logic.services.tags-service :as tags-service]
+            [news_board.dal.dto.tag :as tag]
+            [news_board.dal.rep.tags-rep :as tags-repo]
 
 
             ))
@@ -50,18 +44,10 @@
 (def posts-repository (posts-repo/->posts-rep db/db-spec))
 (def posts-service (posts-service/->posts-service posts-repository))
 
-(def like-repository (like-repo/->like-rep db/db-spec))
-(def like-service (like-service/->like-service like-repository))
 
 
 (def tags-repository (tags-repo/->tags-repo db/db-spec))
 (def tags-service (tags-service/->tags-service tags-repository))
-
-(defn create-user ([login password name lastname birth_date email address phone] (user/->user nil login password name lastname email ))
-          ([id login password name lastname birth_date email address phone] (user/->user id login password name lastname email)))
-
-(defn create-post ([id category_id title description status created_at updated_at] (post/->post nil id category_id title description status created_at updated_at))
-          ([id id category_id title description status created_at updated_at] (post/->post id id category_id title description status created_at updated_at)))
 
 (defroutes app-routes
 
@@ -98,8 +84,6 @@
 
   (GET "/user/:id" [id] (view/user-page (.get-item users-service id) false))
 
-  (GET "/login" [] (view/login))
-
   (GET "/posts" [] (view/all-posts-page (.get-items posts-service) false false nil))
 
   (GET "/post/add" [] (view/add-post-page))
@@ -126,29 +110,6 @@
 
   (GET "/post/:id" [id] (view/post-page (.get-item posts-service id) false))
 
-  ;;comments
-
-  (GET "/like" [] (view/all-likes-page (.get-items like-service) false false nil))
-
-  (GET "/like/add" [] (view/add-like-page))
-
-  (POST "/like/add" request (do (.insert-item like-service (like/->like
-                        (get-in request [:params :post_id])
-                        (get-in request [:params :user_id])))
-                                (print :post_id :user_id)
-                  (response/redirect "/like")))
-
-  (POST "/like/update" request (do (.update-item like-service (like/->like
-                        (get-in request [:params :post_id])
-                        (get-in request [:params :user_id])))
-                  (response/redirect "/like")))
-
-  (POST "/like/delete" request (do (.delete-item like-service
-                        (get-in request [:params :like_id]))
-                 (response/redirect "/like")))
-
-  (GET "/like/:id" [id] (view/like-page (.get-item like-service id) false))
-
 
   (GET "/tags" [id] (view/all-tags-page (.get-items tags-service)))
 
@@ -163,7 +124,7 @@
 
 
   (GET "/" [] (layout/render
-    "home.html" {:docs "document"}))
+    "base.html" {:docs "document"}))
 
   (route/not-found "Not Found"))
 

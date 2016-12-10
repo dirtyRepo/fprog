@@ -1,13 +1,8 @@
-(ns ads-board.views
+(ns news_board.views
 	(:use hiccup.page
 		  hiccup.element
-     :require [ads-board.layout :as layout]
+     :require [news_board.layout :as layout]
      [ring.util.response :as response]))
-
-(defn index-page [] 
-	(layout/render
-    "home.html" {:docs "document"}))
-
 
 ;; tags
 (defn all-tags-page [tag]
@@ -50,19 +45,6 @@
 	(layout/render
 		"posts/post.html" {:post post :updated updated}))
 
-;;like
-
-(defn all-likes-page [like deleted added param]
-	(layout/render
-		"likes/all_likes.html" {:like like :deleted deleted :added added :param param}))
-
-(defn add-like-page []
-	(layout/render
-		"likes/add_like.html"))
-
-(defn like-page [like updated]
-	(layout/render
-		"likes/like.html" {:like like :updated updated}))
 
 
 

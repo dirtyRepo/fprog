@@ -1,4 +1,4 @@
-(ns ads-board.logic.services-protocols.base-protocol)
+(ns news_board.logic.services-protocols.base-protocol)
 
 (defprotocol base-service-protocol
 	(get-items [this])

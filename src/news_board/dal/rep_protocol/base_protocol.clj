@@ -1,4 +1,4 @@
-(ns ads-board.dal.rep-protocol.base-protocol)
+(ns news_board.dal.rep-protocol.base-protocol)
 
 (defprotocol base-rep-protocol
 	(get-items [this])
