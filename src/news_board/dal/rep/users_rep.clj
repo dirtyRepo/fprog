@@ -74,4 +74,28 @@
 			 	(:password %1)
 			 	(:firstname %1)
 			 	(:lastname %1)
-			 	(:email %1)))))
+			 	(:email %1))))
+
+	;(get-users-tags-id [this email]
+	;	(jdbc/query db-spec
+	;							["SELECT id, login, password, firstname, lastname, email FROM user WHERE email = ?" email]
+	;							:row-fn #(user-dto/->user
+	;												(:id %1)
+	;												(:login %1)
+	;												(:password %1)
+	;												(:firstname %1)
+	;												(:lastname %1)
+	;												(:email %1))))
+  ;
+	;(get- [this email]
+	;	(jdbc/query db-spec
+	;							["SELECT id, login, password, firstname, lastname, email FROM user WHERE email = ?" email]
+	;							:row-fn #(user-dto/->user
+	;												(:id %1)
+	;												(:login %1)
+	;												(:password %1)
+	;												(:firstname %1)
+	;												(:lastname %1)
+	;												(:email %1))))
+
+	)

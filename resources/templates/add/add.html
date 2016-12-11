@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+
+    <div class="row">
+        <div class="col-md-offset-1  col-md-6">
+            <h1> Add new like </h1>
+        </div>
+    </div>
+
+    <form action="/like/add" method="post">
+        <div class="form-group">
+            <input name="id" id="id_like" type="hidden" class="form-control">
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="id-user">ID user: </label>
+                </div>
+                <div class="col-md-4">
+                    <input name="id-user" id="id-user_like" type="number" class="form-control" placeholder="Title" >
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="id-post-like">ID post: </label>
+                </div>
+                <div class="col-md-4">
+                    <input name="id-post-like" id="id-post-like" type="number" class="form-control" placeholder="User Id">
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <input type="submit" class="btn btn-block btn-primary" value="Add like">
+            </div>
+        </div>
+    </form>
+
+    <form action="/user/tag/add" method="post">
+        <div class="form-group">
+            <input name="id" id="id" type="hidden" class="form-control">
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="id-user">ID user: </label>
+                </div>
+                <div class="col-md-4">
+                    <input name="id-user" id="id-user" type="number" class="form-control" placeholder="Title" >
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="id-tag">ID tag: </label>
+                </div>
+                <div class="col-md-4">
+                    <input name="id-tag" id="id-tag" type="number" class="form-control" placeholder="User Id">
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <input type="submit" class="btn btn-block btn-primary" value="Add tag">
+            </div>
+        </div>
+    </form>
+
+
+</head>
+<body>
+
+</body>
+</html>

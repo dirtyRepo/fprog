@@ -5,7 +5,7 @@
 
 (defn now [] (new java.util.Date))
 
-(deftype posts-service [posts-repo] 
+(deftype posts-service [posts-repo]
 
 	base-protocol/base-service-protocol
 
@@ -24,8 +24,8 @@
 	(delete-item [this id]
 		(.delete-item posts-repo id))
 
-	(get-all-users-post [this id_user])
-		(.get-all-users-post)
-
 	posts-protocol/posts-service-protocol
+
+	;(get-all-users-post [this id_user])
+	;(.get-all-users-post)
 )

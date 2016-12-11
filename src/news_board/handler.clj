@@ -31,7 +31,9 @@
             [news_board.dal.dto.tag :as tag]
             [news_board.dal.rep.tags-rep :as tags-repo]
 
-
+            [news_board.dal.dto.like :as like]
+            [news_board.dal.rep.likes-rep :as likes-repo]
+            [news_board.logic.services.likes-service :as likes-service]
             ))
 
 
@@ -44,11 +46,11 @@
 (def posts-repository (posts-repo/->posts-rep db/db-spec))
 (def posts-service (posts-service/->posts-service posts-repository))
 
-
+(def likes-repository (likes-repo/->like-repo db/db-spec))
+(def likes-service (likes-service/->likes-service likes-repository) )
 
 (def tags-repository (tags-repo/->tags-repo db/db-spec))
 (def tags-service (tags-service/->tags-service tags-repository))
-
 (defroutes app-routes
 
 
@@ -121,6 +123,14 @@
               nil))
               (response/redirect "/tags")))
 
+  (POST "/like/add" request (do (.insert-item likes-service (like/->like
+                                                           (get-in request [:id_user :id_user])
+                                                           (get-in request [:id_post :id_post]))
+                               (response/redirect "/"))))
+
+
+
+  (GET "/user_add" [] (view/add-likes-tasg))
 
 
   (GET "/" [] (layout/render

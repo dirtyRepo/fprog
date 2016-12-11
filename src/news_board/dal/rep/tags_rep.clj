@@ -1,5 +1,5 @@
 (ns news_board.dal.rep.tags-rep
-  (:require [news_board.dal.rep-protocol.users-protocol :as users-protocol]
+  (:require [news_board.dal.rep-protocol.tags-protocol :as tags-protocol]
             [news_board.dal.rep-protocol.base-protocol :as base-protocol]
             [news_board.dal.dto.tag :as tag-dto]
             [clojure.java.jdbc.sql :as sql]
@@ -30,5 +30,11 @@
   (insert-item [this newItem]
     (jdbc/insert! db-spec :tag {
       :name (:name newItem)}))
+
+  tags-protocol/tags-rep-protocol
+
+  (get-users-subsribe-tags-id [this id]
+    (jdbc/query db-spec
+                ["SELECT id_tag FROM tag_user WHERE id_tag = ?" id]))
 
   )

@@ -45,6 +45,10 @@
 	(layout/render
 		"posts/post.html" {:post post :updated updated}))
 
+(defn add-likes-tasg []
+  (layout/render
+		"add/add.html"))
+
 
 
 
